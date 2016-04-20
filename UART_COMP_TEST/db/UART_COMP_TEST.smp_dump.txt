@@ -1,0 +1,16 @@
+
+State Machine - |UART_COMP_TEST|UART_TX_MY:uart_tx_unit|state_reg
+Name state_reg.stop state_reg.bit_parzystosci state_reg.dane state_reg.start state_reg.czekaj 
+state_reg.czekaj 0 0 0 0 0 
+state_reg.start 0 0 0 1 1 
+state_reg.dane 0 0 1 0 1 
+state_reg.bit_parzystosci 0 1 0 0 1 
+state_reg.stop 1 0 0 0 1 
+
+State Machine - |UART_COMP_TEST|UART_RX_MY:uart_rx_unit|Stan
+Name Stan.stop Stan.bit_parzystosci Stan.dane Stan.start Stan.czekaj 
+Stan.czekaj 0 0 0 0 0 
+Stan.start 0 0 0 1 1 
+Stan.dane 0 0 1 0 1 
+Stan.bit_parzystosci 0 1 0 0 1 
+Stan.stop 1 0 0 0 1 

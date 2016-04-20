@@ -1,0 +1,37 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "TX",
+					"strict" : false
+				},
+				{
+					"name" : "RX_Blad_Par",
+					"strict" : false
+				},
+				{
+					"name" : "Baud_Monitor",
+					"strict" : false
+				},
+				{
+					"name" : "Bit_Par",
+					"strict" : false
+				},
+				{
+					"name" : "RX",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

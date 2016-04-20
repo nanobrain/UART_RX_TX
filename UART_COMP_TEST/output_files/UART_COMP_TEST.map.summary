@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Wed Apr 20 01:13:43 2016
+Quartus Prime Version : 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Revision Name : UART_COMP_TEST
+Top-level Entity Name : UART_COMP_TEST
+Family : MAX 10
+Total logic elements : 118
+    Total combinational functions : 102
+    Dedicated logic registers : 63
+Total registers : 63
+Total pins : 7
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0
