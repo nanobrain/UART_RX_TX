@@ -1,0 +1,52 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/adria/Documents/Workspace/Quartus Prime 15.1/UART_COMPREHENSIVE/Projects/UART_RX_TEST/simulation/qsim
+vUART_RX_TEST
+Z1 !s110 1461106577
+!i10b 1
+!s100 >Y@VNnPD8TM?2cD2`[aa:1
+IQkh;J4EV^]K=ZK]10Eki00
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1461106575
+8UART_RX_TEST.vo
+FUART_RX_TEST.vo
+L0 32
+Z3 OV;L;10.4b;61
+r1
+!s85 0
+31
+Z4 !s108 1461106577.000000
+!s107 UART_RX_TEST.vo|
+!s90 -work|work|UART_RX_TEST.vo|
+!i113 1
+Z5 o-work work
+n@u@a@r@t_@r@x_@t@e@s@t
+vUART_RX_TEST_vlg_vec_tst
+R1
+!i10b 1
+!s100 4oXbEhJE?LBc`a:VdE[2V0
+IjD1AS2Qmm5FW@:Ack5ecC1
+R2
+R0
+w1461106568
+8Waveform1.vwf.vt
+FWaveform1.vwf.vt
+L0 30
+R3
+r1
+!s85 0
+31
+R4
+!s107 Waveform1.vwf.vt|
+!s90 -work|work|Waveform1.vwf.vt|
+!i113 1
+R5
+n@u@a@r@t_@r@x_@t@e@s@t_vlg_vec_tst

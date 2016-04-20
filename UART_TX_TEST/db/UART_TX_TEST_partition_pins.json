@@ -1,0 +1,33 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "TX",
+					"strict" : false
+				},
+				{
+					"name" : "TX_Dane_Gotowe",
+					"strict" : false
+				},
+				{
+					"name" : "Bit_Par",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "TX_Start",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
