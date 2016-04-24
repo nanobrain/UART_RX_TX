@@ -14,7 +14,6 @@ entity UART_RX_MY is
 				Bit_Par : in STD_LOGIC;
 				Blad_Par : out STD_LOGIC;
 				Dane_Wyj: out STD_LOGIC_VECTOR(7 downto 0);
-				stan_ctr : out unsigned( 3 downto 0);
 				RX_Dane_Gotowe: out STD_LOGIC
 			);
 
@@ -46,7 +45,7 @@ architecture arch of UART_RX_MY is
 		end if;
 	end process;
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-	process(stan, Baud, Baud_Ctr, Nowe_Dane, Dane_Reg, RX, Dane_Ctr, Bit_Par )
+	process(stan, Baud, Baud_Ctr, Nowe_Dane, Dane_Reg, RX, Dane_Ctr )
 	begin
 		Nast_Stan<=Stan;
 		RX_Dane_Gotowe <='0';
@@ -54,11 +53,10 @@ architecture arch of UART_RX_MY is
 		Nowe_Dane <= Dane_Reg;
 		Nowe_Dane_Ctr <= Dane_Ctr;
 		Nowe_Baud_Ctr <= Baud_Ctr;
-		stan_ctr <="0101";
 		case Stan is
 ---------------------------------		
 			when czekaj=>
-				stan_ctr <="1110";
+			
 				if(RX='0') then
 				
 					Nast_Stan <= start;
@@ -69,7 +67,6 @@ architecture arch of UART_RX_MY is
 			when start=>
 			
 			if(Baud='1') then
-			stan_ctr <="1101";
 				if Baud_Ctr = 15 then
 					
 					Nast_Stan <= dane;
@@ -84,7 +81,7 @@ architecture arch of UART_RX_MY is
 			end if;
 ---------------------------------
 			when dane=>
-			stan_ctr <="1011";
+			
 				if(Baud='1') then
 					if ( Baud_Ctr = 15 ) then
 						
@@ -92,12 +89,8 @@ architecture arch of UART_RX_MY is
 						Nowe_Dane <= RX & Dane_Reg(7 downto 1);
 						
 						if ( Dane_Ctr = Dane_Bity-1 ) then
-							
-							if(Bit_Par = '1') then
-								Nast_Stan <= bit_parzystosci;
-							else
-								Nast_Stan <= stop;
-							end if;
+
+							Nast_Stan <= bit_parzystosci;
 							
 						else
 
@@ -113,34 +106,35 @@ architecture arch of UART_RX_MY is
 				end if;
 ---------------------------------
 			when bit_parzystosci=>
-				stan_ctr <="0111";
-					if(Baud = '1' ) then
-							if ( Baud_Ctr = 15 ) then
-									
-								if ( RX = not (Dane_Reg(7) xor Dane_Reg(6) xor Dane_Reg(5) xor Dane_Reg(4) xor Dane_Reg(3) xor Dane_Reg(2) xor Dane_Reg(1) xor Dane_Reg(0)) ) then
-								
-									Blad_Par <= '1';
-									Nast_Stan <= stop;
-									
+				
+				if(Bit_Par = '1') then
+						if(Baud = '1' ) then
+								if ( Baud_Ctr = 15 ) then
+										
+										if ( RX = not (Dane_Reg(7) xor Dane_Reg(6) xor Dane_Reg(5) xor Dane_Reg(4) xor Dane_Reg(3) xor Dane_Reg(2) xor Dane_Reg(1) xor Dane_Reg(0)) ) then
+										
+												Blad_Par <= '1';
+												Nast_Stan <= stop;
+											
+										else
+
+											Nast_Stan <= stop;
+										
+										end if;
 								else
+								
+									Nowe_Baud_Ctr <= Baud_Ctr + 1;
 									
-									Blad_Par <= '0';
-									Nast_Stan <= stop;
-								
 								end if;
-							else
-							
-								Nowe_Baud_Ctr <= Baud_Ctr + 1;
-								
-							end if;
-					else
+						end if;
+				elsif( Bit_Par = '0') then
+				
+					Nast_Stan <= stop;
 					
-						Nast_Stan <= stop;
-						
-					end if;
+				end if;
 ---------------------------------
 			when stop=>
-			stan_ctr <="0000";
+			
 				if(Baud='1') then
 				
 					if(Baud_Ctr = 15) then

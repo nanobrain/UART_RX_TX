@@ -2,12 +2,11 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity UART_COMP_TEST_NoFlagBuff is
+entity UART_COMP_TEST_nobuf is
 	generic(
 		Dane_Bity		: integer:=8;
 		Preskaler		: integer:=65;
-		Preskaler_Bity	: integer:=8;
-		FlagBuf_W		: integer:=8
+		Preskaler_Bity	: integer:=8
 	);
 	
 	port(
@@ -18,10 +17,10 @@ entity UART_COMP_TEST_NoFlagBuff is
 		RX_Blad_Par :  out std_logic;
 		Baud_Monitor:  out std_logic
 	);
-end UART_COMP_TEST_NoFlagBuff;
+end UART_COMP_TEST_nobuf
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-architecture str_arch of UART_COMP_TEST_NoFlagBuff is
+architecture str_arch of UART_COMP_TEST_nobuf is
 
 signal Baud					: std_logic;
 
@@ -72,18 +71,9 @@ signal Dane_Buf_to_TX	: std_logic_vector(7 downto 0);
 						 TX => TX,
 						 TX_Dane_Gotowe =>  TX_Clear_Flag);
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-		RX_Flag_buf_unit: entity work.Flag_buf(arch)
-		
-			generic map( FlagBuf_W => FlagBuf_W )
-			
-			port map( clk => clk, reset => reset,
-						 --Wejscia
-						 Dane_Wej => Dane_RX_to_Buf,
-						 Clr_Flag => TX_Clear_Flag,
-						 Set_Flag => RX_Set_Flag,
-						 --Wyjscia
-						 flag => TX_Set_Flag,
-						 Dane_Wyj => Dane_Buf_to_TX);
+RX_Set_Flag <= TX_Set_Flag;
+Dane_RX_to_Buf <= Dane_Buf_to_TX;
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 Baud_Monitor<=Baud;

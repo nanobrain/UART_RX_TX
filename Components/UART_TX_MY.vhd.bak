@@ -46,8 +46,8 @@ entity UART_TX_MY is
 		end if;
 	end process;
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-	process(state_reg, Baud_Ctr, Dane_Ctr, Dane_Reg, Baud, TX_reg, TX_start, Dane_Wej, Bit_Par)
-	variable VParzystosc : std_logic :='0';
+	process(state_reg, Baud_Ctr, Dane_Ctr, Dane_Reg, Baud, TX_reg, TX_start, Dane_Wej)
+	variable VParzystosc : std_logic;
 	begin
 		state_next<=state_reg;
 		Nowe_Baud_Ctr<=Baud_Ctr;
@@ -55,7 +55,6 @@ entity UART_TX_MY is
 		Nowe_Dane<=Dane_Reg;
 		TX_next<=TX_reg;
 		TX_Dane_Gotowe<='0';
-		VParzystosc := '0';
 		
 		case state_Reg is
 			when czekaj =>
@@ -86,11 +85,7 @@ entity UART_TX_MY is
 						Nowe_Baud_Ctr<=(others=>'0');
 						Nowe_Dane<= '0' & Dane_Reg(7 downto 1);
 						if Dane_Ctr=(Dane_Bity-1) then
-						if ( Bit_Par = '1') then
 							state_next<=bit_parzystosci;
-						else
-							state_next<=stop;
-						end if;
 						else
 							Nowe_Dane_Ctr<=Dane_Ctr + 1;
 						end if;
@@ -100,14 +95,18 @@ entity UART_TX_MY is
 				end if;
 				
 			when bit_parzystosci =>
-				if(Baud='1') then
-					TX_Next <= VParzystosc;
-					if Baud_Ctr=15 then
-						Nowe_Baud_Ctr<=(others=>'0');
-						state_next<=stop;
-					else
-						Nowe_Baud_Ctr<=Baud_Ctr+1;
+				if ( Bit_Par = '1') then
+					if(Baud='1') then
+						TX_Next <= VParzystosc;
+						if Baud_Ctr=15 then
+							Nowe_Baud_Ctr<=(others=>'0');
+							state_next<=stop;
+						else
+							Nowe_Baud_Ctr<=Baud_Ctr+1;
+						end if;
 					end if;
+				else
+					state_next<=stop;
 				end if;
 			when stop=>
 				TX_next<='1';
@@ -119,7 +118,6 @@ entity UART_TX_MY is
 						Nowe_Baud_Ctr<=Baud_Ctr+1;
 					end if;
 				end if;
-				
 		end case;
 	end process;
 -----------------------------------------------------------------------------------------------------------------------------------------------------
